@@ -9,9 +9,9 @@ type Book = {
   author_name: string[];
 };
 
-async function getBooks(query: string): Promise<Book[]> {
+async function getBooks(query: string, offset: number, size: number): Promise<Book[]> {
   return fetch(
-    `http://openlibrary.org/search.json?title=${query === "" ? "the" : query}`
+    `http://openlibrary.org/search.json?title=${query === "" ? "the" : query}&offset=${offset}&limit=${size}`,
   )
     .then((res) => res.json())
     .then((data) => data.docs);
